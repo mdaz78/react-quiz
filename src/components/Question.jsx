@@ -1,15 +1,13 @@
 import React from 'react';
 import Options from './Options';
 
-const Question = ({ question }) => {
+const Question = ({ question, dispatch }) => {
   const { question: currentQuestion, options } = question;
-
-  console.log({ currentQuestion, options });
 
   return (
     <div>
       <h4>{currentQuestion}</h4>
-      <Options options={options} />
+      <Options options={options} dispatch={dispatch} />
     </div>
   );
 };

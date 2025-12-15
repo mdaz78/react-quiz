@@ -12,14 +12,17 @@ const initialState = {
   // different statuses -> 'loading', 'error', 'ready', 'active', 'finished'
   status: 'loading',
   index: 0,
+  answer: null,
 };
 
 function reducer(state, action) {
-  switch (action.type) {
+  const { type, payload } = action;
+
+  switch (type) {
     case 'dataReceived':
       return {
         ...state,
-        questions: action.payload,
+        questions: payload,
         status: 'ready',
       };
 
@@ -33,6 +36,12 @@ function reducer(state, action) {
       return {
         ...state,
         status: 'active',
+      };
+
+    case 'newAnswer':
+      return {
+        ...state,
+        answer: payload,
       };
 
     default:
@@ -76,7 +85,9 @@ function App() {
             dispatch={dispatch}
           />
         )}
-        {status === 'active' && <Question question={questions[index]} />}
+        {status === 'active' && (
+          <Question question={questions[index]} dispatch={dispatch} />
+        )}
       </Main>
     </div>
   );
