@@ -9,8 +9,7 @@ import StartScreen from './components/StartScreen';
 
 const initialState = {
   questions: [],
-  // different statuses -> 'loading', 'error', 'ready', 'active', 'finished'
-  status: 'loading',
+  status: 'loading', // different statuses -> 'loading', 'error', 'ready', 'active', 'finished'
   index: 0,
   answer: null,
 };
