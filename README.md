@@ -77,21 +77,30 @@ react-quiz/
 │   ├── assets/
 │   │   └── react.svg
 │   ├── components/
-│   │   ├── Error.jsx        # Error display component
-│   │   ├── FinishScreen.jsx # Quiz completion screen
-│   │   ├── Footer.jsx       # Footer container for timer and next button
-│   │   ├── Header.jsx       # App header
-│   │   ├── Loader.jsx       # Loading indicator
-│   │   ├── Main.jsx         # Main container
-│   │   ├── NextQuestion.jsx # Next/Finish button
-│   │   ├── Options.jsx      # Answer options component
-│   │   ├── Progress.jsx     # Progress bar and stats
-│   │   ├── Question.jsx     # Question display
-│   │   ├── StartScreen.jsx  # Welcome screen
-│   │   └── Timer.jsx        # Countdown timer component
-│   ├── App.jsx              # Main app component with state management
-│   ├── index.css            # Global styles
-│   └── main.jsx             # App entry point
+│   │   ├── ui/
+│   │   │   ├── Error.jsx        # Error display component
+│   │   │   └── Loader.jsx        # Loading indicator
+│   │   ├── layout/
+│   │   │   ├── Header.jsx        # App header
+│   │   │   ├── Footer.jsx        # Footer container for timer and next button
+│   │   │   └── Main.jsx          # Main container
+│   │   ├── quiz/
+│   │   │   ├── Question.jsx      # Question display
+│   │   │   ├── Options.jsx      # Answer options component
+│   │   │   ├── Progress.jsx     # Progress bar and stats
+│   │   │   ├── Timer.jsx        # Countdown timer component
+│   │   │   └── NextQuestion.jsx  # Next/Finish button
+│   │   └── results/
+│   │       ├── StartScreen.jsx  # Welcome screen
+│   │       └── FinishScreen.jsx # Quiz completion screen
+│   ├── config/
+│   │   └── constants.js          # App constants (SECONDS_PER_QUESTION, initialState)
+│   ├── hooks/                    # Custom React hooks (empty for now)
+│   ├── services/                 # API services and external integrations (empty for now)
+│   ├── utils/                    # Utility functions (empty for now)
+│   ├── App.jsx                   # Main app component with state management
+│   ├── index.css                 # Global styles
+│   └── main.jsx                  # App entry point
 ├── package.json
 └── README.md
 ```
@@ -100,7 +109,7 @@ react-quiz/
 
 ### State Management
 
-The application uses React's `useReducer` hook to manage complex state. The state includes:
+The application uses React's `useReducer` hook to manage complex state. The initial state and constants are defined in `config/constants.js`. The state includes:
 
 - `questions`: Array of quiz questions
 - `status`: Current app status (`loading`, `error`, `ready`, `active`, `finished`)
@@ -108,7 +117,7 @@ The application uses React's `useReducer` hook to manage complex state. The stat
 - `answer`: Selected answer for current question
 - `points`: Current score
 - `highScore`: Best score achieved
-- `secondsRemaining`: Time remaining in seconds (15 seconds per question)
+- `secondsRemaining`: Time remaining in seconds (15 seconds per question, defined in `SECONDS_PER_QUESTION` constant)
 
 ### Application Flow
 
@@ -125,13 +134,28 @@ The application uses React's `useReducer` hook to manage complex state. The stat
 
 ### Key Components
 
-- **StartScreen**: Welcome screen with quiz information and start button
+**UI Components** (`components/ui/`):
+
+- **Error**: Error display component for API failures
+- **Loader**: Loading indicator while fetching questions
+
+**Layout Components** (`components/layout/`):
+
+- **Header**: App header with logo and title
+- **Footer**: Container component that wraps the timer and next button
+- **Main**: Main container for app content
+
+**Quiz Components** (`components/quiz/`):
+
 - **Question**: Displays the current question
 - **Options**: Renders answer options with interactive buttons that show correct/incorrect feedback
 - **Progress**: Shows current question number, progress bar, and points
 - **Timer**: Displays countdown timer (15 seconds per question) in MM:SS format, automatically finishes quiz when time expires
-- **Footer**: Container component that wraps the timer and next button
 - **NextQuestion**: Conditionally renders "Next" or "Finish" button
+
+**Results Components** (`components/results/`):
+
+- **StartScreen**: Welcome screen with quiz information and start button
 - **FinishScreen**: Displays results, percentage score, high score, and restart button
 
 ## Data Format
