@@ -1,6 +1,7 @@
 import { useEffect, useReducer } from 'react';
 
 import Error from './components/Error';
+import FinishScreen from './components/FinishScreen';
 import Header from './components/Header';
 import Loader from './components/Loader';
 import Main from './components/Main';
@@ -53,15 +54,11 @@ function reducer(state, action) {
       };
     }
 
-    case 'nextQuestion': {
-      const nextIndex = state.index + 1;
-
-      if (nextIndex >= state.questions.length) {
-        return { ...state, status: 'finished' };
-      }
-
+    case 'nextQuestion':
       return { ...state, index: state.index + 1, answer: null };
-    }
+
+    case 'finished':
+      return { ...state, status: 'finished' };
 
     default:
       throw new Error(`Action unknown ${action}`);
@@ -123,8 +120,16 @@ function App() {
               dispatch={dispatch}
               answer={answer}
             />
-            <NextQuestion dispatch={dispatch} answer={answer} />
+            <NextQuestion
+              dispatch={dispatch}
+              answer={answer}
+              index={index}
+              numberOfQuestions={numberOfQuestions}
+            />
           </>
+        )}
+        {status === 'finished' && (
+          <FinishScreen maxPossiblePoints={maxPossiblePoints} points={points} />
         )}
       </Main>
     </div>
