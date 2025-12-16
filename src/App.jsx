@@ -4,6 +4,7 @@ import Error from './components/Error';
 import Header from './components/Header';
 import Loader from './components/Loader';
 import Main from './components/Main';
+import NextQuestion from './components/NextQuestion';
 import Question from './components/Question';
 import StartScreen from './components/StartScreen';
 
@@ -51,6 +52,9 @@ function reducer(state, action) {
       };
     }
 
+    case 'nextQuestion':
+      return { ...state, index: state.index + 1, answer: null };
+
     default:
       throw new Error(`Action unknown ${action}`);
   }
@@ -92,12 +96,16 @@ function App() {
             dispatch={dispatch}
           />
         )}
+
         {status === 'active' && (
-          <Question
-            question={questions[index]}
-            dispatch={dispatch}
-            answer={answer}
-          />
+          <>
+            <Question
+              question={questions[index]}
+              dispatch={dispatch}
+              answer={answer}
+            />
+            <NextQuestion dispatch={dispatch} answer={answer} />
+          </>
         )}
       </Main>
     </div>
