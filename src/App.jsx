@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Loader from './components/Loader';
 import Main from './components/Main';
 import NextQuestion from './components/NextQuestion';
+import Progress from './components/Progress';
 import Question from './components/Question';
 import StartScreen from './components/StartScreen';
 
@@ -68,12 +69,16 @@ function reducer(state, action) {
 }
 
 function App() {
-  const [{ questions, status, index, answer }, dispatch] = useReducer(
+  const [{ questions, status, index, answer, points }, dispatch] = useReducer(
     reducer,
     initialState
   );
 
   const numberOfQuestions = questions?.length;
+  const maxPossiblePoints = questions.reduce(
+    (prev, current) => prev + current.points,
+    0
+  );
 
   useEffect(() => {
     try {
@@ -106,6 +111,13 @@ function App() {
 
         {status === 'active' && (
           <>
+            <Progress
+              index={index}
+              numberOfQuestions={numberOfQuestions}
+              points={points}
+              maxPoints={maxPossiblePoints}
+              answer={answer}
+            />
             <Question
               question={questions[index]}
               dispatch={dispatch}
