@@ -1,28 +1,21 @@
 import { useEffect, useReducer } from 'react';
 
-import Error from './components/Error';
-import FinishScreen from './components/FinishScreen';
-import Footer from './components/Footer';
-import Header from './components/Header';
-import Loader from './components/Loader';
-import Main from './components/Main';
-import NextQuestion from './components/NextQuestion';
-import Progress from './components/Progress';
-import Question from './components/Question';
-import StartScreen from './components/StartScreen';
-import Timer from './components/Timer';
+import Error from './components/ui/Error';
+import Loader from './components/ui/Loader';
 
-const SECONDS_PER_QUESTION = 15;
+import Footer from './components/layout/Footer';
+import Header from './components/layout/Header';
+import Main from './components/layout/Main';
 
-const initialState = {
-  questions: [],
-  status: 'loading', // different statuses -> 'loading', 'error', 'ready', 'active', 'finished'
-  index: 0,
-  answer: null,
-  points: 0,
-  highScore: 0,
-  secondsRemaining: null,
-};
+import NextQuestion from './components/quiz/NextQuestion';
+import Progress from './components/quiz/Progress';
+import Question from './components/quiz/Question';
+import Timer from './components/quiz/Timer';
+
+import FinishScreen from './components/results/FinishScreen';
+import StartScreen from './components/results/StartScreen';
+
+import { SECONDS_PER_QUESTION, initialState } from './config/constants';
 
 function reducer(state, action) {
   const { type, payload } = action;
