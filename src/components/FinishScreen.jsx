@@ -1,5 +1,7 @@
-const FinishScreen = ({ points, maxPossiblePoints, highScore }) => {
+const FinishScreen = ({ points, maxPossiblePoints, highScore, dispatch }) => {
   const percentage = Math.ceil((points / maxPossiblePoints) * 100);
+
+  const handleRestart = () => dispatch({ type: 'restart' });
 
   return (
     <>
@@ -9,6 +11,10 @@ const FinishScreen = ({ points, maxPossiblePoints, highScore }) => {
       </p>
 
       <p className='highscore'>High Score: {highScore} Points</p>
+
+      <button className='btn btn-ui' onClick={handleRestart}>
+        Restart Quiz
+      </button>
     </>
   );
 };
