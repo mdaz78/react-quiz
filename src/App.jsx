@@ -52,8 +52,15 @@ function reducer(state, action) {
       };
     }
 
-    case 'nextQuestion':
+    case 'nextQuestion': {
+      const nextIndex = state.index + 1;
+
+      if (nextIndex >= state.questions.length) {
+        return { ...state, status: 'finished' };
+      }
+
       return { ...state, index: state.index + 1, answer: null };
+    }
 
     default:
       throw new Error(`Action unknown ${action}`);
