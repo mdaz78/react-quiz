@@ -2,6 +2,16 @@
 
 An interactive quiz application built with React and Vite that tests your React knowledge. The app features a clean UI, progress tracking, scoring system, and high score management.
 
+## Screenshots
+
+### Welcome Screen
+
+![Welcome Screen](./assets/welcome-screen.png)
+
+### Quiz Screen
+
+![Quiz Screen](./assets/quiz-screen.png)
+
 ## Features
 
 - 🎯 **Interactive Quiz**: Answer multiple-choice questions about React
