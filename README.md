@@ -8,6 +8,7 @@ An interactive quiz application built with React and Vite that tests your React 
 - 📊 **Progress Tracking**: Visual progress bar showing current question and completion status
 - 💯 **Scoring System**: Points-based scoring with different point values per question
 - 🏆 **High Score**: Tracks and displays your best score
+- ⏱️ **Timer**: Countdown timer (15 seconds per question) that automatically finishes the quiz when time runs out
 - ⚡ **State Management**: Uses React's `useReducer` hook for efficient state management
 - 🎨 **Modern UI**: Clean and responsive design
 - 🔄 **Error Handling**: Graceful error handling for API failures
@@ -78,6 +79,7 @@ react-quiz/
 │   ├── components/
 │   │   ├── Error.jsx        # Error display component
 │   │   ├── FinishScreen.jsx # Quiz completion screen
+│   │   ├── Footer.jsx       # Footer container for timer and next button
 │   │   ├── Header.jsx       # App header
 │   │   ├── Loader.jsx       # Loading indicator
 │   │   ├── Main.jsx         # Main container
@@ -85,7 +87,8 @@ react-quiz/
 │   │   ├── Options.jsx      # Answer options component
 │   │   ├── Progress.jsx     # Progress bar and stats
 │   │   ├── Question.jsx     # Question display
-│   │   └── StartScreen.jsx  # Welcome screen
+│   │   ├── StartScreen.jsx  # Welcome screen
+│   │   └── Timer.jsx        # Countdown timer component
 │   ├── App.jsx              # Main app component with state management
 │   ├── index.css            # Global styles
 │   └── main.jsx             # App entry point
@@ -105,6 +108,7 @@ The application uses React's `useReducer` hook to manage complex state. The stat
 - `answer`: Selected answer for current question
 - `points`: Current score
 - `highScore`: Best score achieved
+- `secondsRemaining`: Time remaining in seconds (15 seconds per question)
 
 ### Application Flow
 
@@ -114,7 +118,9 @@ The application uses React's `useReducer` hook to manage complex state. The stat
    - Progress bar
    - Question text
    - Multiple choice options (with visual feedback for correct/incorrect)
+   - Countdown timer (MM:SS format)
    - Next/Finish button
+   - Timer automatically finishes the quiz when it reaches zero
 4. **Finished**: Displays final score, percentage, high score, and restart option
 
 ### Key Components
@@ -123,6 +129,8 @@ The application uses React's `useReducer` hook to manage complex state. The stat
 - **Question**: Displays the current question
 - **Options**: Renders answer options with interactive buttons that show correct/incorrect feedback
 - **Progress**: Shows current question number, progress bar, and points
+- **Timer**: Displays countdown timer (15 seconds per question) in MM:SS format, automatically finishes quiz when time expires
+- **Footer**: Container component that wraps the timer and next button
 - **NextQuestion**: Conditionally renders "Next" or "Finish" button
 - **FinishScreen**: Displays results, percentage score, high score, and restart button
 
